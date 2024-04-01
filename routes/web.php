@@ -13,9 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->middleware('auth')->name('home');    
+
 Route::prefix('admin')->group(function () {
     Route::group(['middleware' => 'auth'], function () {
-        Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');    
         Route::resource('/permission', App\Http\Controllers\PermissionController::class);
         Route::resource('/role', App\Http\Controllers\RoleController::class);
         Route::resource('/user', App\Http\Controllers\UserController::class);
@@ -30,6 +32,6 @@ Route::prefix('admin')->group(function () {
 });
 
 
-// Route::get('/testing',function(){
-//     return view('pages.home');
+// Route::get('/',function(){
+//     return view('auth.login');
 // });
