@@ -15,7 +15,7 @@ class VideoController extends Controller
      */
     public function index()
     {
-        $videos = Video::latest()->paginate(4);
+        $videos = Video::latest()->paginate(5);
         return response()->json([
             "response" => [
                 "status"    => 200,
@@ -32,7 +32,7 @@ class VideoController extends Controller
      */
     public function VideoHomePage()
     {
-        $videos = Video::latest()->take(2)->get();
+        $videos = Video::latest()->take(6)->get();
         return response()->json([
             "response" => [
                 "status"    => 200,
