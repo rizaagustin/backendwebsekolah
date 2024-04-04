@@ -10,9 +10,9 @@
     <title>Web Sekolah</title>
   </head>
   <body>
-    <section class="vh-100">
+    <section class="">
       <div class="container-fluid">
-        <div class="row align-items-center">
+        <div class="row align-items-center justify-content-center">
           <div class="col-md-6 text-black p-5">
               <h3 class="fw-normal mb-3 pb-3 text-center" style="letter-spacing: 1px;">Silahkan Login</h3>
               @foreach ($errors->all() as $error)
@@ -35,9 +35,10 @@
             </form>
           </div>
 
-          <div class="col-md-6 px-0 d-none d-sm-block">
-            <img src="{{ asset('assets/dist/img/sekolah.jpg') }}" srcset="{{ asset('assets/dist/img/sekolah.jpg') }} 480w, {{ asset('assets/dist/img/sekolah.jpg') }} 1024w" alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
+          <div class="col-md-6 px-0 d-none d-sm-block text-center">
+            <img src="{{ asset('assets/dist/img/sekolah3.jpg') }}" alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
           </div>
+
         </div>
       </div>
     </section>    

@@ -30,5 +30,19 @@ class UserSeeder extends Seeder
         $role->syncPermissions($permissions);
 
         $user->assignRole($role);
+
+        $user = User::create([
+            'name'      => 'User Satu',
+            'email'     => 'user@gmail.com',
+            'password'  => bcrypt('password'),
+        ]);
+
+        $permissions = Permission::all();
+
+        $role = Role::where('name', 'user')->first();
+
+        $role->syncPermissions($permissions);
+
+        $user->assignRole($role);
     }
 }

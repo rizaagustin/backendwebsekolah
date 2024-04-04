@@ -11,7 +11,7 @@
                     <form action="{{ route('photo.index') }}" method="GET">
                     <div class="col-md-9">
                         @can('photos.create')
-                            <a href="javascript:void(0)" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modal-add" id="btn-create-post">Tambah Photo</a>                            
+                            <a href="javascript:void(0)" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modal-add" id="btn-create-post">Add Photo</a>                            
                         @endcan
                     </div>
                     <div class="col-md-3">
@@ -23,7 +23,7 @@
                         </div>
                     </div>
                     </form>
-                </div>z
+                </div>
             </div>
             <div class="box-body">
                 <table id="" class="table table-bordered table-hover">
@@ -32,7 +32,7 @@
                         <th>#</th>
                         <th>Photo</th>
                         <th>Caption</th>
-                        <th>Aksi</th>
+                        <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
