@@ -32,7 +32,7 @@
     }
   </style>
 </head>
-<body class="sidebar-mini skin-red-light sidebar-open">
+<body class="sidebar-mini skin-red-light sidebar-open sidebar-collapse">
 <input type="hidden" id="base_url" value="{{ url('/') }}" />
 <div class="wrapper">
 
