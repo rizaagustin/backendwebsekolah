@@ -10,7 +10,9 @@
                     <br>
                     <form action="{{ route('event.index') }}" method="GET">
                     <div class="col-md-9">
-                        <a href="{{ route('event.create') }}" class="btn btn-primary mb-2" >Add Event</a>
+                        @can('events.create')
+                            <a href="{{ route('event.create') }}" class="btn btn-primary mb-2" >Add Event</a>                            
+                        @endcan
                     </div>
                     <div class="col-md-3">
                         <div class="input-group">
@@ -38,8 +40,12 @@
                         <td>{{ $i + $events->firstItem() }}</td>
                         <td>{{ $event->title }}</td>
                         <td>
-                            <a href="{{ route('event.edit', $event->id) }}" class="btn btn-success btn-sm"><i class="fa fa-fw fa-pencil"></i></a>
-                            <a href="javascript:void(0)" id="btn-delete-event" data-id="{{ $event->id }}" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></a>
+                            @can('events.edit')
+                                <a href="{{ route('event.edit', $event->id) }}" class="btn btn-success btn-sm"><i class="fa fa-fw fa-pencil"></i></a>                                
+                            @endcan
+                            @can('events.delete')
+                                <a href="javascript:void(0)" id="btn-delete-event" data-id="{{ $event->id }}" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></a>                                
+                            @endcan
                         </td>
                     </tr>
                     @endforeach

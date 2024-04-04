@@ -6,18 +6,20 @@
       <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Daftar Permission</h3>
+                <h3 class="box-title">Data Permission</h3>
                 <div class="row">
                     <br>
                     <form action="{{ route('permission.index') }}" method="GET">
                     <div class="col-md-9">
-                        <a href="javascript:void(0)" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modal-add" id="btn-create-post">Tambah Permission</a>
+                        {{-- @can('permission-create') --}}
+                            <a href="javascript:void(0)" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modal-add" id="btn-create-post">Add Permission</a>                            
+                        {{-- @endcan --}}
                     </div>
                     <div class="col-md-3">
                         <div class="input-group">
-                            <input type="text" name="search" class="form-control">
+                            <input type="text" name="search" class="form-control" placeholder="seacrh">
                                 <span class="input-group-btn">
-                                  <button type="button" class="btn btn-info btn-flat">Cari</button>
+                                  <button type="button" class="btn btn-info btn-flat">Search</button>
                                 </span>
                         </div>
                     </div>
@@ -39,8 +41,12 @@
                             <td>{{ $i + $permissions->firstItem() }}</td>
                             <td>{{ $data->name }}</td>
                             <td>
-                                <a href="javascript:void(0)" id="btn-edit-permission" data-id="{{ $data->id }}" class="btn btn-success btn-sm"><i class="fa fa-fw fa-pencil"></i></a>
-                                <a href="javascript:void(0)" id="btn-delete-permission" data-id="{{ $data->id }}" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></a>
+                                {{-- @can('permission-edit') --}}
+                                    <a href="javascript:void(0)" id="btn-edit-permission" data-id="{{ $data->id }}" class="btn btn-success btn-sm"><i class="fa fa-fw fa-pencil"></i></a>                                    
+                                {{-- @endcan --}}
+                                {{-- @can('permission-delete') --}}
+                                    <a href="javascript:void(0)" id="btn-delete-permission" data-id="{{ $data->id }}" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></a>                                    
+                                {{-- @endcan --}}
                             </td>
                         </tr>
                         @endforeach
@@ -95,7 +101,7 @@
         let id_permission = $(this).data('id');
         let base_url = $('#base_url').val();
         $.ajax({
-            url: `${base_url}/permission/${id_permission}/edit`,  
+            url: `${base_url}/admin/permission/${id_permission}/edit`,  
             type: "GET",
             cache: false,
             success:function(response){
@@ -110,7 +116,7 @@
         var form = new FormData($('#editPermisionForm')[0]);
         var id_permission  =$('#permission_id').val();        
         $.ajax({
-            url: "{{ url('/') }}/permission/"+id_permission,
+            url: "{{ url('/') }}/admin/permission/"+id_permission,
             type: "POST",
             data: form,
             contentType: false,
@@ -156,7 +162,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: `{{ url('/') }}/permission/${post_id}`,
+                    url: `{{ url('/') }}/admin/permission/${post_id}`,
                     type: "DELETE",
                     cache: false,
                     data: {

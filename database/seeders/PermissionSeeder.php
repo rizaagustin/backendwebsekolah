@@ -62,11 +62,17 @@ class PermissionSeeder extends Seeder
 
         //permission for permissions
         Permission::create(['name' => 'permissions.index']);
+        Permission::create(['name' => 'permissions.create']);
+        Permission::create(['name' => 'permissions.edit']);
+        Permission::create(['name' => 'permissions.delete']);
 
         //permission for users
         Permission::create(['name' => 'users.index']);
         Permission::create(['name' => 'users.create']);
         Permission::create(['name' => 'users.edit']);
         Permission::create(['name' => 'users.delete']);
+
+        //home
+        Permission::create(['name' => 'home.index']);
     }
 }

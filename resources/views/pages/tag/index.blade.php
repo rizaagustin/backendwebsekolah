@@ -5,18 +5,20 @@
       <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Daftar Tag</h3>
+                <h3 class="box-title">Data Tag</h3>
                 <div class="row">
                     <br>
                     <form action="{{ route('tag.index') }}" method="GET">
                     <div class="col-md-9">
-                        <a href="javascript:void(0)" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modal-add" id="btn-create-post">Tambah Tag</a>
+                        @can('tags.create')
+                            <a href="javascript:void(0)" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modal-add" id="btn-create-post">Add Tag</a>                            
+                        @endcan
                     </div>
                     <div class="col-md-3">
                         <div class="input-group">
                             <input type="text" name="search" class="form-control">
                                 <span class="input-group-btn">
-                                  <button type="button" class="btn btn-info btn-flat">Cari</button>
+                                  <button type="button" class="btn btn-info btn-flat">Search</button>
                                 </span>
                         </div>
                     </div>
@@ -40,8 +42,12 @@
                         <td>{{ $tag->name }}</td>
                         <td>{{ $tag->slug }}</td>
                         <td>
-                            <a href="javascript:void(0)" id="btn-edit-tag" data-id="{{ $tag->id }}" class="btn btn-success btn-sm"><i class="fa fa-fw fa-pencil"></i></a>
-                            <a href="javascript:void(0)" id="btn-delete-tag" data-id="{{ $tag->id }}" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></a>
+                            @can('tags.edit')
+                                <a href="javascript:void(0)" id="btn-edit-tag" data-id="{{ $tag->id }}" class="btn btn-success btn-sm"><i class="fa fa-fw fa-pencil"></i></a>                                
+                            @endcan
+                            @can('tags.delete')
+                                <a href="javascript:void(0)" id="btn-delete-tag" data-id="{{ $tag->id }}" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></a>                                
+                            @endcan
                         </td>
                     </tr>
                     @endforeach

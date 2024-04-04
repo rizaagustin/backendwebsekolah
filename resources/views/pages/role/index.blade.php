@@ -5,18 +5,20 @@
       <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Daftar Role</h3>
+                <h3 class="box-title">Data Role</h3>
                 <div class="row">
                     <br>
-                    <form action="{{ route('permission.index') }}" method="GET">
+                    <form action="{{ route('role.index') }}" method="GET">
                     <div class="col-md-9">
-                        <a href="javascript:void(0)" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modal-add" id="btn-create-post">Tambah Role</a>
+                        @can('roles.create')
+                            <a href="javascript:void(0)" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modal-add" id="btn-create-post">Add Role</a>
+                        @endcan
                     </div>
                     <div class="col-md-3">
                         <div class="input-group">
-                            <input type="text" name="search" class="form-control">
+                            <input type="text" name="search" class="form-control" placeholder="search">
                                 <span class="input-group-btn">
-                                  <button type="button" class="btn btn-info btn-flat">Cari</button>
+                                  <button type="button" class="btn btn-info btn-flat">Search</button>
                                 </span>
                         </div>
                     </div>
@@ -44,8 +46,12 @@
                             @endforeach
                         </td>
                         <td>
-                            <a href="javascript:void(0)" id="btn-edit-role" data-id="{{ $role->id }}" class="btn btn-success btn-sm"><i class="fa fa-fw fa-pencil"></i></a>
-                            <a href="javascript:void(0)" id="btn-delete-role" data-id="{{ $role->id }}" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></a>
+                            @can('roles.edit')
+                                <a href="javascript:void(0)" id="btn-edit-role" data-id="{{ $role->id }}" class="btn btn-success btn-sm"><i class="fa fa-fw fa-pencil"></i></a>                                
+                            @endcan
+                            @can('roles.delete')
+                                <a href="javascript:void(0)" id="btn-delete-role" data-id="{{ $role->id }}" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></a>                                
+                            @endcan
                         </td>
                     </tr>
                     @endforeach
@@ -101,7 +107,7 @@
         let base_url = $('#base_url').val();
         $('#modal-edit input[type="checkbox"]').prop('checked', false);
         $.ajax({
-            url: `${base_url}/role/${id_role}/edit`,  
+            url: `${base_url}/admin/role/${id_role}/edit`,  
             type: "GET",
             cache: false,
             success:function(response){
@@ -119,7 +125,7 @@
         var form = new FormData($('#editForm')[0]);
         var role_id  =$('#role_id').val();        
         $.ajax({
-            url: "{{ url('/') }}/role/"+role_id,
+            url: "{{ url('/') }}/admin/role/"+role_id,
             type: "POST",
             data: form,
             contentType: false,
@@ -165,7 +171,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: `{{ url('/') }}/role/${role_id}`,
+                    url: `{{ url('/') }}/admin/role/${role_id}`,
                     type: "DELETE",
                     cache: false,
                     data: {

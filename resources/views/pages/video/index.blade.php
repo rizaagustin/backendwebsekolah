@@ -10,7 +10,9 @@
                     <br>
                     <form action="{{ route('video.index') }}" method="GET">
                     <div class="col-md-9">
-                        <a href="javascript:void(0)" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modal-add" id="btn-create-post">Add Video</a>
+                        @can('videos.create')
+                            <a href="javascript:void(0)" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modal-add" id="btn-create-post">Add Video</a>                            
+                        @endcan
                     </div>
                     <div class="col-md-3">
                         <div class="input-group">
@@ -40,8 +42,12 @@
                         <td>{{ $video->title }}</td>
                         <td>{{ $video->embed }}</td>
                         <td>
-                            <a href="javascript:void(0)" id="btn-edit-video" data-id="{{ $video->id }}" class="btn btn-success btn-sm"><i class="fa fa-fw fa-pencil"></i></a>
-                            <a href="javascript:void(0)" id="btn-delete-video" data-id="{{ $video->id }}" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></a>
+                            @can('videos.edit')
+                                <a href="javascript:void(0)" id="btn-edit-video" data-id="{{ $video->id }}" class="btn btn-success btn-sm"><i class="fa fa-fw fa-pencil"></i></a>                                
+                            @endcan
+                            @can('videos.delete')
+                                <a href="javascript:void(0)" id="btn-delete-video" data-id="{{ $video->id }}" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></a>                                
+                            @endcan
                         </td>
                     </tr>
                     @endforeach

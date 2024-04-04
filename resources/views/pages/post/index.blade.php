@@ -10,7 +10,9 @@
                     <br>
                     <form action="{{ route('post.index') }}" method="GET">
                     <div class="col-md-9">
-                        <a href="{{ route('post.create') }}" class="btn btn-primary mb-2">Add Post</a>
+                        @can('posts.create')
+                            <a href="{{ route('post.create') }}" class="btn btn-primary mb-2">Add Post</a>                            
+                        @endcan
                     </div>
                     <div class="col-md-3">
                         <div class="input-group">
@@ -40,8 +42,12 @@
                         <td><img src="{{ $post->image }}" class="img-fluid" width="100px"> </td>
                         <td>{{ $post->title }}</td>
                         <td>
-                            <a href="{{ route('post.edit', $post->id) }}" class="btn btn-success btn-sm"><i class="fa fa-fw fa-pencil"></i></a>
-                            <a href="javascript:void(0)" id="btn-delete-post" data-id="{{ $post->id }}" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></a>
+                            @can('posts.edit')
+                                <a href="{{ route('post.edit', $post->id) }}" class="btn btn-success btn-sm"><i class="fa fa-fw fa-pencil"></i></a>                                
+                            @endcan
+                            @can('posts.delete')
+                                <a href="javascript:void(0)" id="btn-delete-post" data-id="{{ $post->id }}" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></a>                                
+                            @endcan
                         </td>
                     </tr>
                     @endforeach

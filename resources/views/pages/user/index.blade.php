@@ -5,18 +5,20 @@
       <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Daftar User</h3>
+                <h3 class="box-title">Data User</h3>
                 <div class="row">
                     <br>
                     <form action="{{ route('user.index') }}" method="GET">
                     <div class="col-md-9">
-                        <a href="javascript:void(0)" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modal-add" id="btn-create-post">Tambah User</a>
+                        @can('users.create')
+                            <a href="javascript:void(0)" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modal-add" id="btn-create-post">Add User</a>                            
+                        @endcan
                     </div>
                     <div class="col-md-3">
                         <div class="input-group">
                             <input type="text" name="search" class="form-control">
                                 <span class="input-group-btn">
-                                  <button type="button" class="btn btn-info btn-flat">Cari</button>
+                                  <button type="button" class="btn btn-info btn-flat">Search</button>
                                 </span>
                         </div>
                     </div>
@@ -48,8 +50,12 @@
                             @endif
                         </td>
                         <td>
-                            <a href="javascript:void(0)" id="btn-edit-user" data-id="{{ $user->id }}" class="btn btn-success btn-sm"><i class="fa fa-fw fa-pencil"></i></a>
+                            @can('users.edit')
+                                <a href="javascript:void(0)" id="btn-edit-user" data-id="{{ $user->id }}" class="btn btn-success btn-sm"><i class="fa fa-fw fa-pencil"></i></a>                                
+                            @endcan
+                            @can('users.delete')
                             <a href="javascript:void(0)" id="btn-delete-user" data-id="{{ $user->id }}" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></a>
+                            @endcan
                         </td>
                     </tr>
                     @endforeach
@@ -106,7 +112,7 @@
         let base_url = $('#base_url').val();
         $('#modal-edit input[type="checkbox"]').prop('checked', false);
         $.ajax({
-            url: `${base_url}/user/${id_user}/edit`,  
+            url: `${base_url}admin/user/${id_user}/edit`,  
             type: "GET",
             cache: false,
             success:function(response){
@@ -126,7 +132,7 @@
         var user_id  =$('#user_id').val();     
         $('.error-text').text('');   
         $.ajax({
-            url: "{{ url('/') }}/user/"+user_id,
+            url: "{{ url('/') }}admin/user/"+user_id,
             type: "POST",
             data: form,
             contentType: false,
@@ -172,7 +178,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: `{{ url('/') }}/user/${user_id}`,
+                    url: `{{ url('/') }}admin/user/${user_id}`,
                     type: "DELETE",
                     cache: false,
                     data: {

@@ -4,23 +4,23 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Admin Sekolah</title>
-  <!-- Tell the browser to be responsive to screen width -->
+
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.7 -->
+
   <link rel="stylesheet" href="{{ asset('assets/bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
-  <!-- Font Awesome -->
+
   <link rel="stylesheet" href="{{ asset('assets/bower_components/font-awesome/css/font-awesome.min.css')}}">
-  <!-- Ionicons -->
+
   <link rel="stylesheet" href="{{ asset('assets/bower_components/Ionicons/css/ionicons.min.css')}}">
-  <!-- DataTables -->
+
   <link rel="stylesheet" href="{{ asset('assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}">
-  <!-- Theme style -->
+
   <link rel="stylesheet" href="{{ asset('assets/dist/css/AdminLTE.min.css')}}">
-  <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
+
   <link rel="stylesheet" href="{{ asset('assets/dist/css/skins/_all-skins.min.css')}}">
   <link rel="stylesheet" href="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.css') }}">
   <script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+  <link rel="icon" href="{{ asset('assets/dist/img/avatar.png') }}" type="image/x-icon">
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <!-- Google Font -->
@@ -28,20 +28,17 @@
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   <style>
     .main-header .navbar {
-        background-color: #605ca8;
+        background-color: #dd4b39;
     }
   </style>
 </head>
-<body class="sidebar-mini skin-purple-light sidebar-open">
+<body class="sidebar-mini skin-red-light sidebar-open">
 <input type="hidden" id="base_url" value="{{ url('/') }}" />
 <div class="wrapper">
 
   <header class="main-header">
     <!-- Logo -->
     <a href="../../index2.html" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      {{-- <span class="logo-mini"><b>A</b>LT</span> --}}
-      <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><b>ADMIN</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
@@ -78,7 +75,7 @@
       <div class="user-panel">
       </div>
       <!-- search form -->
-      {{-- <form action="#" method="get" class="sidebar-form">
+      <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
           <input type="text" name="q" class="form-control" placeholder="Search...">
           <span class="input-group-btn">
@@ -86,24 +83,48 @@
                 </button>
               </span>
         </div>
-      </form> --}}
+      </form>
 
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">MASTER DATA</li>
-        <li><a href="{{ route('tag.index') }}"><i class="fa fa-circle-o text-red"></i> <span>Tag</span></a></li>
-        <li><a href="{{ route('category.index') }}"><i class="fa fa-circle-o text-red"></i> <span>Category</span></a></li>
-        <li><a href="{{ route('photo.index') }}"><i class="fa fa-circle-o text-red"></i> <span>Photo</span></a></li>
-        <li><a href="{{ route('video.index') }}"><i class="fa fa-circle-o text-red"></i> <span>Video</span></a></li>
-        <li><a href="{{ route('slider.index') }}"><i class="fa fa-circle-o text-red"></i> <span>Slider</span></a></li>
-        <li><a href="{{ route('post.index') }}"><i class="fa fa-circle-o text-red"></i> <span>Post</span></a></li>
-        <li><a href="{{ route('event.index') }}"><i class="fa fa-circle-o text-red"></i> <span>Event</span></a></li>
+        <li class="header"></li>
+        @can('home.index')
+          <li><a href="/"><i class="fa fa-dashboard text-red"></i><span>Dashboard</span></a></li>          
+        @endcan        
+        @can('tags.index')
+          <li><a href="{{ route('tag.index') }}"><i class="fa fa-tag text-red"></i> <span>Tag</span></a></li>          
+        @endcan
+        @can('categories.index')
+          <li><a href="{{ route('category.index') }}"><i class="fa fa-certificate text-red"></i><span>Category</span></a></li>          
+        @endcan
+        @can('photos.index')
+          <li><a href="{{ route('photo.index') }}"><i class="fa fa-photo text-red"></i><span>Photo</span></a></li>          
+        @endcan
+        @can('videos.index')
+          <li><a href="{{ route('video.index') }}"><i class="fa fa-youtube-play text-red"></i><span>Video</span></a></li>          
+        @endcan
+        @can('sliders.index')
+          <li><a href="{{ route('slider.index') }}"><i class="fa fa-sliders text-red"></i><span>Slider</span></a></li>          
+        @endcan
+        @can('posts.index')
+          <li><a href="{{ route('post.index') }}"><i class="fa fa-edit text-red"></i><span>Post</span></a></li>
+          
+        @endcan
+        @can('events.index')
+          <li><a href="{{ route('event.index') }}"><i class="fa fa-calendar text-red"></i><span>Event</span></a></li>          
+        @endcan
       </ul>
 
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">SETTING</li>
-        <li><a href="{{ route('permission.index') }}"><i class="fa fa-circle-o text-red"></i> <span>Permission</span></a></li>
-        <li><a href="{{ route('role.index') }}"><i class="fa fa-circle-o text-red"></i> <span>Role</span></a></li>
-        <li><a href="{{ route('user.index') }}"><i class="fa fa-circle-o text-red"></i> <span>User</span></a></li>
+        @can('permissions.index')
+          <li><a href="{{ route('permission.index') }}"><i class="fa fa-gears text-red"></i> <span>Permission</span></a></li>          
+        @endcan
+        @can('roles.index')
+          <li><a href="{{ route('role.index') }}"><i class="fa fa-gears text-red"></i> <span>Role</span></a></li>          
+        @endcan
+        @can('users.index')
+          <li><a href="{{ route('user.index') }}"><i class="fa fa-users text-red"></i> <span>User</span></a></li>          
+        @endcan
       </ul>
     </section>
   </aside>

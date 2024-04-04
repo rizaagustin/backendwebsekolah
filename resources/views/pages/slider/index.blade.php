@@ -10,15 +10,11 @@
                     <br>
                     <form action="{{ route('slider.index') }}" method="GET">
                     <div class="col-md-9">
-                        <a href="javascript:void(0)" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modal-add" id="btn-create-post">Add Slider</a>
+                        @can('sliders.create')
+                            <a href="javascript:void(0)" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modal-add" id="btn-create-post">Add Slider</a>                            
+                        @endcan
                     </div>
                     <div class="col-md-3">
-                        {{-- <div class="input-group">
-                            <input type="text" name="search" class="form-control" placeholder="seacrh">
-                                <span class="input-group-btn">
-                                  <button type="button" class="btn btn-info btn-flat">Search</button>
-                                </span>
-                        </div> --}}
                     </div>
                     </form>
                 </div>
@@ -40,7 +36,9 @@
                             <img src="{{ $slider->image }}" class="img-fluid" width="100px">
                         </td>
                         <td>
-                            <a href="javascript:void(0)" id="btn-delete-slider" data-id="{{ $slider->id }}" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></a>
+                            @can('sliders.delete')
+                                <a href="javascript:void(0)" id="btn-delete-slider" data-id="{{ $slider->id }}" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></a>                                
+                            @endcan
                         </td>
                     </tr>
                     @endforeach

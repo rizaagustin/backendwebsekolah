@@ -1,82 +1,46 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Admin Sekolah</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="{{ asset('assets/bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="{{ asset('assets/bower_components/font-awesome/css/font-awesome.min.css') }}">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="{{ asset('assets/bower_components/Ionicons/css/ionicons.min.css') }}">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="{{ asset('assets/dist/css/AdminLTE.min.css') }}">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="{{ asset('assets/plugins/iCheck/square/blue.css') }}">
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>Web Sekolah</title>
+  </head>
+  <body>
+    <section class="vh-100">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+          <div class="col-sm-6 text-black p-5">
+              <h3 class="fw-normal mb-3 pb-3 text-center" style="letter-spacing: 1px;">Silahkan Login</h3>
+              @foreach ($errors->all() as $error)
+                <p class="text-danger">
+                {{ $error }}
+                {{-- email dan kata sandi yang Anda masukkan tidak sesuai --}}
+                </p>
+              @endforeach      
+              <form action="{{ route('login') }}" method="post">
+                @csrf
+                <div class="form-outline mb-4">
+                  <input type="email" name="email" class="form-control" placeholder="Email">
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+              </div>
+              <div class="form-outline mb-4">
+                <input type="password" name="password" class="form-control" placeholder="Password">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+              </div>
+                  <button type="submit" class="btn btn-primary w-100">Masuk </button>
+            </form>
+          </div>
 
-  <!-- Google Font -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-</head>
-<body class="hold-transition login-page">
-<div class="login-box">
-  <div class="login-logo">
-    <a href="{{ asset('assets/index2.html')}}"><b>Web Sekolah</a>
-  </div>
-  <!-- /.login-logo -->
-  <div class="login-box-body">
-    <p class="login-box-msg">Masukan Email dan Password</p>
-        @foreach ($errors->all() as $error)
-        <div class="bg-red">
-        {{ $error }}
-        {{-- email dan kata sandi yang Anda masukkan tidak sesuai --}}
+          <div class="col-sm-6 px-0 d-none d-sm-block">
+              <img src="{{ asset('assets/dist/img/sekolah.jpg') }}" alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
+          </div>
         </div>
-    @endforeach
-    <form action="{{ route('login') }}" method="post">
-        @csrf
-      <div class="form-group has-feedback">
-        <input type="email" name="email" class="form-control" placeholder="Email">
-        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
-      <div class="form-group has-feedback">
-        <input type="password" name="password" class="form-control" placeholder="Password">
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-      </div>
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
-      </div>
-    </form>
-
-    {{-- <a href="#">I forgot my password</a><br>
-    <a href="register.html" class="text-center">Register a new membership</a> --}}
-
-  </div>
-  <!-- /.login-box-body -->
-</div>
-<!-- /.login-box -->
-
-<!-- jQuery 3 -->
-<script src="{{ asset('assets/bower_components/jquery/dist/jquery.min.js')}}"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="{{ asset('assets/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
-<!-- iCheck -->
-<script src="{{ asset('assets/plugins/iCheck/icheck.min.js')}}"></script>
-<script>
-  $(function () {
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-blue',
-      increaseArea: '20%' /* optional */
-    });
-  });
-</script>
-</body>
+    </section>    
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+ </body>
 </html>

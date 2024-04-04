@@ -10,7 +10,9 @@
                     <br>
                     <form action="{{ route('photo.index') }}" method="GET">
                     <div class="col-md-9">
-                        <a href="javascript:void(0)" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modal-add" id="btn-create-post">Tambah Photo</a>
+                        @can('photos.create')
+                            <a href="javascript:void(0)" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modal-add" id="btn-create-post">Tambah Photo</a>                            
+                        @endcan
                     </div>
                     <div class="col-md-3">
                         <div class="input-group">
@@ -21,7 +23,7 @@
                         </div>
                     </div>
                     </form>
-                </div>
+                </div>z
             </div>
             <div class="box-body">
                 <table id="" class="table table-bordered table-hover">
@@ -38,11 +40,13 @@
                     <tr>
                         <td>{{ $i + $photos->firstItem() }}</td>
                         <td>
-                            <img src="{{ $photo->image }}" class="img-fluid" width="100px">
+                            <img src="{{ $photo->image }}" class="img-fluid" width="100px" style="width: 100px">
                         </td>
                         <td>{{ $photo->caption }}</td>
                         <td>
-                            <a href="javascript:void(0)" id="btn-delete-photo" data-id="{{ $photo->id }}" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></a>
+                            @can('photos.delete')
+                                <a href="javascript:void(0)" id="btn-delete-photo" data-id="{{ $photo->id }}" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></a>                                
+                            @endcan
                         </td>
                     </tr>
                     @endforeach
